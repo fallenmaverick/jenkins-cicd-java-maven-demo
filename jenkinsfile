@@ -1,4 +1,4 @@
-def tomcatServerUrl = "http://172.31.14.95"
+
 pipeline {
   agent {
     node {
@@ -11,7 +11,7 @@ pipeline {
     /* stage('Code checkout') {
       steps {
         //download code from github
-        git 'https://github.com/ajitinamdar-tech/jenkins-cicd-java-maven-demo.git'
+        git 'https://github.com/fallenmaverick/jenkins-cicd-java-maven-demo.git'
       }
 
     }*/
@@ -25,10 +25,7 @@ pipeline {
     stage('Deploy') {
       steps {
         //deploy war on tomcat server
-        deploy adapters: [tomcat8(url: "${tomcatServerUrl}",
-            credentialsId: 'tomcat-credentials')],
-          war: 'target/*.war',
-          contextPath: 'pipeline-app'
+       deploy adapters: [tomcat8(credentialsId: 'tomcat-cred', path: '', url: 'http://13.232.254.62:8080/')], contextPath: null, war: '**/*.war'
 
       }
     }
